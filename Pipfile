@@ -13,9 +13,17 @@ django-filter = "*"
 djoser = "*"
 djangorestframework-simplejwt = "*"
 pillow = "*"
+django-cors-headers = "*"
+django-templated-mail = "*"
+redis = "*"
+celery = "*"
+flower = "*"
+pytest = "*"
 
 [dev-packages]
 autopep8 = "*"
+pytest = "*"
+pytest-django = "*"
+pytest-watch = "*"
 
 [requires]
-python_version = "3.9"
