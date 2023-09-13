@@ -19,11 +19,15 @@ redis = "*"
 celery = "*"
 flower = "*"
 pytest = "*"
+gunicorn = "*"
 
 [dev-packages]
 autopep8 = "*"
 pytest = "*"
 pytest-django = "*"
 pytest-watch = "*"
+model-bakery = "*"
+locust = "*"
+django-silk = "*"
 
 [requires]

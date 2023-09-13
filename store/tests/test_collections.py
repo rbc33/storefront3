@@ -1,7 +1,7 @@
-from django.contrib.auth.models import User
 from store.models import Collection, Product
 from rest_framework import status
 import pytest
+from model_bakery import baker
 
 
 @pytest.fixture
@@ -9,12 +9,6 @@ def create_collection(api_client):
     def do_create_collection(collection):
         return api_client.post('/store/collections/', collection)
     return do_create_collection
-
-@pytest.fixture
-def authenticate(api_client):
-     def do_authenticate(is_staff=False):
-        return api_client.force_authenticate(user=User(is_staff=is_staff))
-     return do_authenticate
 
 
 @pytest.mark.django_db
@@ -48,3 +42,16 @@ class TestCreateCollection:
         assert response.data['id'] > 0
 
 
+@pytest.mark.django_db
+class TestRetrieveCollection:
+    def test_if_collection_exists_returns_200(self, api_client):
+        collection = baker.make(Collection)
+
+        response = api_client.get(f'/store/collections/{collection.id}/')
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data == {
+            'id': collection.id,
+            'title': collection.title,
+            'products_count': 0
+        }
